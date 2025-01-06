@@ -101,7 +101,7 @@ transplantation = readRDS("data/transplantation_limma_result.rds") %>%
 
 #'Reading the DEG analysis file of HCC data
 #+
-hcc = readRDS("data/hcc_limma_results.rds") %>% as_tibble() %>%
+hcc = readRDS("data/korean_hcc_limma_results.rds") %>% as_tibble() %>%
   dplyr:: select(gene, contrast,logFC, pval, fdr, regulation)  %>%
   mutate(phenotype = "hcc") %>% 
   filter(gene %in% (grch38 %>% filter(biotype == "protein_coding") %>% pull(symbol) %>%
@@ -164,6 +164,9 @@ if (!dir.exists("output")){
   dir.create("output")
 }
 
+if (!dir.exists("results")){
+  dir.create("results")
+}
 
 #' ## Running GSEA using fgsea package  
 #' Inputs are ranked list of genes `signature_df` and `genesets_top`.

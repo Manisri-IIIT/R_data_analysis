@@ -1,5 +1,5 @@
 ---
-title: "Cross-specias analysis of mouse, HCC and liver transplantation patient cohorts transcriptome"
+title: "Cross-species analysis of mouse, HCC and liver transplantation patient cohorts transcriptome"
 output: html_document
 ---
 
@@ -113,7 +113,7 @@ transplantation = readRDS("data/transplantation_limma_result.rds") %>%
 Reading the DEG analysis file of HCC data
 
 ```{r }
-hcc = readRDS("data/hcc_limma_results.rds") %>% as_tibble() %>%
+hcc = readRDS("data/korean_hcc_limma_results.rds") %>% as_tibble() %>%
   dplyr:: select(gene, contrast,logFC, pval, fdr, regulation)  %>%
   mutate(phenotype = "hcc") %>% 
   filter(gene %in% (grch38 %>% filter(biotype == "protein_coding") %>% pull(symbol) %>%
@@ -193,6 +193,10 @@ Open a folder to save the output of intermediate results
 ```{r }
 if (!dir.exists("output")){
   dir.create("output")
+}
+
+if (!dir.exists("results")){
+  dir.create("results")
 }
 ```
 
